@@ -1,8 +1,8 @@
 import React from "react";
 import MovieCard from "./MovieCard";
-import FP from "./assets/spiderman.png";
+import FP from "../assets/spiderman.png";
 
-const MovieList = () => {
+const MovieList = ({ searchValue }) => {
   const films = [
     { name: "Spiderman", image: FP, link: "/", rate: 10 },
     { name: "Batman", image: FP, link: "/", rate: 5 },
@@ -14,15 +14,17 @@ const MovieList = () => {
 
   return (
     <div className="px-[50px] flex gap-[20px] my-[50px] flex-wrap justify-center">
-      {films.map((film, index) => (
-        <MovieCard
-          key={index}
-          name={film.name}
-          image={film.image}
-          link={film.link}
-          rate={film.rate}
-        />
-      ))}
+      {films
+        .filter((el) => el.name.toLowerCase().includes(searchValue))
+        .map((film, index) => (
+          <MovieCard
+            key={index}
+            name={film.name}
+            image={film.image}
+            link={film.link}
+            rate={film.rate}
+          />
+        ))}
     </div>
   );
 };
